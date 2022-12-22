@@ -1,10 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from 'react';
 import uniqid from 'uniqid';
 import Card from './Card';
 import Scoreboard from './Scoreboard';
 
 export default function App() {
+
+  // State variables
   const [ gameOver, setGameOver ] = useState(false);
+
+  const [ roundOver, setRoundOver ] = useState(false);
   
   const [ currentScore, setCurrentScore ] = useState(0);
 
@@ -19,7 +24,27 @@ export default function App() {
     { name: "Mike Ehrmantraut", imgSrc: "", hasBeenClicked: false, originalIndex: 7, key: uniqid() }
   ]);
 
+  const roundTwoCards = [
+    { name: "Chuck McGill", imgSrc: "", hasBeenClicked: false, originalIndex: 8, key: uniqid() },
+    { name: "Kim Wexler", imgSrc: "", hasBeenClicked: false, originalIndex: 9, key: uniqid() },
+    { name: "Gustavo Fring", imgSrc: "", hasBeenClicked: false, originalIndex: 10, key: uniqid() },
+    { name: "Nacho Varga", imgSrc: "", hasBeenClicked: false, originalIndex: 11, key: uniqid() },
+    { name: "Howard Hamlin", imgSrc: "", hasBeenClicked: false, originalIndex: 12, key: uniqid() },
+    { name: "Lalo Salamanca", imgSrc: "", hasBeenClicked: false, originalIndex: 13, key: uniqid() },
+  ];
+
+  // Ref variables
+
   const cardsArray = useRef();
+
+  // Functions
+
+  const resetCards = (currentCards) => {
+    return currentCards.map((card) => {
+      card.hasBeenClicked = false;
+      return card;
+    });
+  };
 
   const handleClick = (e) => {
 
@@ -29,26 +54,31 @@ export default function App() {
       : parseInt(e.target.dataset.index, 10);
     let tempCards = [...cards];
 
-    // Check if card has been clicked
+    // Card == clicked
     if (tempCards[index].hasBeenClicked) {
-      // If card has been clicked, set currentScore to 0 and reset cards
-      tempCards = tempCards.map((card) => {
-        let tempCard = card;
-        tempCard.hasBeenClicked = false;
-        return tempCard;
-      });
+      // currentScore == 0, reset cards
+      tempCards = resetCards(tempCards);
       setCurrentScore(0);
     } else {
-      // If card has not been clicked, set clicked to true and increment current score
+      // If card != clicked, set clicked == true, and current score ++
       tempCards[index].hasBeenClicked = true;
-      setCurrentScore(currentScore + 1);
+      setCurrentScore((prevCurrentScore) => prevCurrentScore + 1);
     }
-    // Sort cards back into order so that originalIndex property remains true when sorting in useEffect
+
+    // Check if round or game is over
+    if (tempCards.every((card) => card.hasBeenClicked))
+      (tempCards.length > 8) ? setGameOver(true) : setRoundOver(true);
+
+    // Sort cards into order so that originalIndex property == true when sorting in useEffect
     setCards(tempCards.sort((a, b) => a.originalIndex - b.originalIndex));
   };
+
+  // Effects
   
+  // Shuffle cards
   useEffect(() => {
-    // Shuffle cards
+    console.log("Shuffle cards");
+    console.table(cards);
     cardsArray.current = 
       cards
       .map((card) => ({ card, sortKey: Math.random() }))
@@ -62,7 +92,23 @@ export default function App() {
           index = { card.originalIndex }
           key = { card.key }
         />);
-  });
+  }, [ cards ]);
+
+  // End 1st round
+  useEffect(() => {
+    if (roundOver === false) return;
+    console.log("Round Over");
+    setCards((prevCards) => resetCards(prevCards).concat(roundTwoCards));
+  }, [ roundOver ]);
+
+  // End game
+  useEffect(() => {
+    if (gameOver === false) return;
+    console.log("Game over");
+    setCards((prevCards) => resetCards(prevCards).slice(0, 7));
+    setRoundOver(false);
+    setGameOver(false);
+  }, [ gameOver ]);
 
   return (
     <div className="App">
