@@ -4,6 +4,7 @@ export default function Scoreboard(props) {
     const [ highScore, setHighScore ] = useState(0);
 
     useEffect(() => {
+        // Set high score to current score if current higher
         if (props.currentScore > highScore) setHighScore(props.currentScore);
     }, [props.currentScore, highScore]);
 
