@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
-import Card from './Card';
 import Scoreboard from './Scoreboard';
+import List from './List';
 
 export default function App() {
 
@@ -32,10 +32,6 @@ export default function App() {
     { name: "Howard Hamlin", imgSrc: "", hasBeenClicked: false, originalIndex: 12, key: uniqid() },
     { name: "Lalo Salamanca", imgSrc: "", hasBeenClicked: false, originalIndex: 13, key: uniqid() },
   ];
-
-  // Ref variables
-
-  const cardsArray = useRef();
 
   // Functions
 
@@ -74,25 +70,6 @@ export default function App() {
   };
 
   // Effects
-  
-  // Shuffle cards
-  useEffect(() => {
-    console.log("Shuffle cards");
-    console.table(cards);
-    cardsArray.current = 
-      cards
-      .map((card) => ({ card, sortKey: Math.random() }))
-      .sort((a, b) => a.sortKey - b.sortKey)
-      .map(({ card }) => card)
-      .map((card) => 
-        <Card 
-          name = { card.name } 
-          imgSrc = { card.imgSrc } 
-          handleClick = { handleClick } 
-          index = { card.originalIndex }
-          key = { card.key }
-        />);
-  }, [ cards ]);
 
   // End 1st round
   useEffect(() => {
@@ -112,7 +89,7 @@ export default function App() {
 
   return (
     <div className="App">
-      { cardsArray.current }
+      <List cards={ cards } handleClick={ handleClick } />
       <Scoreboard currentScore = { currentScore } />
     </div>
   );
