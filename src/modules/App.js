@@ -4,6 +4,21 @@ import uniqid from 'uniqid';
 import Scoreboard from './Scoreboard';
 import List from './List';
 
+import walt from '../media/walt.jpeg';
+import waltjr from '../media/waltjr.jpeg';
+import skyler from '../media/skyler.jpeg';
+import hank from '../media/hank.jpeg';
+import marie from '../media/marie.jpeg';
+import saul from '../media/saul.jpeg';
+import mike from '../media/mike.jpeg';
+import jesse from '../media/jesse.jpeg';
+import chuck from '../media/chuck.jpeg';
+import kim from '../media/kim.jpeg';
+import gus from '../media/gus.jpeg';
+import nacho from '../media/nacho.jpeg';
+import howard from '../media/howard.jpeg';
+import lalo from '../media/lalo.jpeg';
+
 export default function App() {
 
   // State variables
@@ -14,23 +29,23 @@ export default function App() {
   const [ currentScore, setCurrentScore ] = useState(0);
 
   const [ cards, setCards ] = useState([
-    { name: "Walter White", imgSrc: "", hasBeenClicked: false, originalIndex: 0, key: uniqid() },
-    { name: "Jesse Pinkman", imgSrc: "", hasBeenClicked: false, originalIndex: 1, key: uniqid() },
-    { name: "Saul Goodman", imgSrc: "", hasBeenClicked: false, originalIndex: 2, key: uniqid() },
-    { name: "Hank Schrader", imgSrc: "", hasBeenClicked: false, originalIndex: 3, key: uniqid() },
-    { name: "Marie Schrader", imgSrc: "", hasBeenClicked: false, originalIndex: 4, key: uniqid() },
-    { name: "Skyler White", imgSrc: "", hasBeenClicked: false, originalIndex: 5, key: uniqid() },
-    { name: "Walter White Jr.", imgSrc: "", hasBeenClicked: false, originalIndex: 6, key: uniqid() },
-    { name: "Mike Ehrmantraut", imgSrc: "", hasBeenClicked: false, originalIndex: 7, key: uniqid() }
+    { name: "Walter White", imgSrc: walt, hasBeenClicked: false, originalIndex: 0, key: uniqid() },
+    { name: "Jesse Pinkman", imgSrc: jesse, hasBeenClicked: false, originalIndex: 1, key: uniqid() },
+    { name: "Saul Goodman", imgSrc: saul, hasBeenClicked: false, originalIndex: 2, key: uniqid() },
+    { name: "Hank Schrader", imgSrc: hank, hasBeenClicked: false, originalIndex: 3, key: uniqid() },
+    { name: "Marie Schrader", imgSrc: marie, hasBeenClicked: false, originalIndex: 4, key: uniqid() },
+    { name: "Skyler White", imgSrc: skyler, hasBeenClicked: false, originalIndex: 5, key: uniqid() },
+    { name: "Walter White Jr.", imgSrc: waltjr, hasBeenClicked: false, originalIndex: 6, key: uniqid() },
+    { name: "Mike Ehrmantraut", imgSrc: mike, hasBeenClicked: false, originalIndex: 7, key: uniqid() }
   ]);
 
   const roundTwoCards = [
-    { name: "Chuck McGill", imgSrc: "", hasBeenClicked: false, originalIndex: 8, key: uniqid() },
-    { name: "Kim Wexler", imgSrc: "", hasBeenClicked: false, originalIndex: 9, key: uniqid() },
-    { name: "Gustavo Fring", imgSrc: "", hasBeenClicked: false, originalIndex: 10, key: uniqid() },
-    { name: "Nacho Varga", imgSrc: "", hasBeenClicked: false, originalIndex: 11, key: uniqid() },
-    { name: "Howard Hamlin", imgSrc: "", hasBeenClicked: false, originalIndex: 12, key: uniqid() },
-    { name: "Lalo Salamanca", imgSrc: "", hasBeenClicked: false, originalIndex: 13, key: uniqid() },
+    { name: "Chuck McGill", imgSrc: chuck, hasBeenClicked: false, originalIndex: 8, key: uniqid() },
+    { name: "Kim Wexler", imgSrc: kim, hasBeenClicked: false, originalIndex: 9, key: uniqid() },
+    { name: "Gustavo Fring", imgSrc: gus, hasBeenClicked: false, originalIndex: 10, key: uniqid() },
+    { name: "Nacho Varga", imgSrc: nacho, hasBeenClicked: false, originalIndex: 11, key: uniqid() },
+    { name: "Howard Hamlin", imgSrc: howard, hasBeenClicked: false, originalIndex: 12, key: uniqid() },
+    { name: "Lalo Salamanca", imgSrc: lalo, hasBeenClicked: false, originalIndex: 13, key: uniqid() },
   ];
 
   // Functions
@@ -53,7 +68,12 @@ export default function App() {
     // Card == clicked
     if (tempCards[index].hasBeenClicked) {
       // currentScore == 0, reset cards
-      tempCards = resetCards(tempCards);
+      if (!roundOver) {
+        tempCards = resetCards(tempCards);
+      } else {
+        tempCards = resetCards(tempCards).slice(0, 8);
+        setRoundOver(false);
+      }
       setCurrentScore(0);
     } else {
       // If card != clicked, set clicked == true, and current score ++
