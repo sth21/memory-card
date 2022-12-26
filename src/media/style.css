@@ -68,10 +68,12 @@ body, .root, .app {
 
 h1 {
 	font-size: 4rem;
+	text-align: center;
 }
 
 .scoreboard {
 	display: flex;
+	text-align: center;
 	align-items: center;
 	justify-content: center;
 	width: 80%;
@@ -81,7 +83,10 @@ h1 {
 
 .cards {
 	display: grid;
+	justify-content: center;
 	grid-gap: 2em;
-	grid-template: repeat(5, 1fr) / repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fit, 30%);
+	grid-auto-flow: row;
+	width: 100%;
 }
 

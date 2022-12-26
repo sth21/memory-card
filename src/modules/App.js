@@ -82,15 +82,16 @@ export default function App() {
   useEffect(() => {
     if (gameOver === false) return;
     console.log("Game over");
-    setCards((prevCards) => resetCards(prevCards).slice(0, 7));
+    setCards((prevCards) => resetCards(prevCards).slice(0, 8));
     setRoundOver(false);
     setGameOver(false);
   }, [ gameOver ]);
 
   return (
-    <div className="App">
-      <List cards={ cards } handleClick={ handleClick } />
+    <div className="app">
+      <h1>Memory Card Game</h1>
       <Scoreboard currentScore = { currentScore } />
+      <List cards={ cards } handleClick={ handleClick } />
     </div>
   );
 }

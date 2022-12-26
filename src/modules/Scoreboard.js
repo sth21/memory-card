@@ -9,7 +9,7 @@ export default function Scoreboard(props) {
     }, [props.currentScore, highScore]);
 
     return (
-        <div>
+        <div className="scoreboard">
             <p>{ "Current Score: " + props.currentScore }</p>
             <p>{ "High Score: " + highScore }</p>
         </div>
