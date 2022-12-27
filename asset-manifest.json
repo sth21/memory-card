@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/memory-card/static/css/main.410f1843.css",
+    "main.js": "/memory-card/static/js/main.f2c1bb07.js",
+    "static/media/hank.jpeg": "/memory-card/static/media/hank.ac37ab6cf8e73e52e0bb.jpeg",
+    "static/media/saul.jpeg": "/memory-card/static/media/saul.aa02c6cbb5cdf3559168.jpeg",
+    "static/media/mike.jpeg": "/memory-card/static/media/mike.4433bc9f85e0d4e7ff03.jpeg",
+    "static/media/marie.jpeg": "/memory-card/static/media/marie.96d0af78b07aa3f03486.jpeg",
+    "static/media/skyler.jpeg": "/memory-card/static/media/skyler.3d103a746eee286ffdfb.jpeg",
+    "static/media/waltjr.jpeg": "/memory-card/static/media/waltjr.734cb040f19afbeb6648.jpeg",
+    "static/media/jesse.jpeg": "/memory-card/static/media/jesse.160de0e79ecb23260e88.jpeg",
+    "static/media/walt.jpeg": "/memory-card/static/media/walt.6f5baa8d72d4d6c632f5.jpeg",
+    "static/media/chuck.jpeg": "/memory-card/static/media/chuck.27dfd230a5215b72695e.jpeg",
+    "index.html": "/memory-card/index.html",
+    "main.410f1843.css.map": "/memory-card/static/css/main.410f1843.css.map",
+    "main.f2c1bb07.js.map": "/memory-card/static/js/main.f2c1bb07.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.410f1843.css",
+    "static/js/main.f2c1bb07.js"
+  ]
+}
